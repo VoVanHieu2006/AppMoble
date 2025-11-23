@@ -81,12 +81,13 @@ const LotsOfStyles = () => {
             renderItem={data =>{
               return(
                 <Pressable 
-                onPress={() => deleteToDo(data.item.id)}
                 style = {({pressed}) => ({opacity: pressed ? 0.5 : 1})}
                 >
                  <View style = {styles.groupToDo}>
                   <Text style = {styles.todoItem}>{data.item.name}</Text>
-                  <Fontisto name="close" size={24} color="black" />
+                  <Pressable onPress={() => deleteToDo(data.item.id)}>
+                    <Fontisto name="close" size={24} color="black" />
+                  </Pressable>
                  </View>
                   
 
