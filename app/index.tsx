@@ -1,8 +1,16 @@
-import FlexBox from '@/components/flex.box';
 import { useState } from 'react';
-import { Button, StyleSheet, Text, TextInput, View, 
-  Alert, ScrollView, FlatList, TouchableOpacity, Pressable, 
-  TouchableWithoutFeedback, Keyboard} from 'react-native';
+import {
+  Alert,
+  Button,
+  FlatList,
+  Keyboard,
+  Pressable,
+  StyleSheet, Text, TextInput,
+  TouchableWithoutFeedback,
+  View
+} from 'react-native';
+
+import Fontisto from '@expo/vector-icons/Fontisto';
 
 interface IToDo{
   id: number;
@@ -44,57 +52,72 @@ const LotsOfStyles = () => {
 
   return (
     
-    // <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-    //   <View style={styles.container}>
-    //     {/* Header */}
-    //     <Text style = {styles.header}> TO DO APP </Text>
+    <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
+      <View style={styles.container}>
+        {/* Header */}
+        <Text style = {styles.header}> TO DO APP </Text>
 
-    //     {/* Form  */}
-    //     <View>
-    //       <TextInput 
-    //         value={todo}
-    //         style = {styles.toDoInput} 
-    //         onChangeText={(value) => setToDo(value)}
-    //       />
+        {/* Form  */}
+        <View style = {styles.form}>
+          <TextInput 
+            value={todo}
+            style = {styles.toDoInput} 
+            onChangeText={(value) => setToDo(value)}
+          />
 
-    //       <Button 
-    //         title='Thêm việc'
-    //         color={'red'}
-    //         onPress={handleAddToDo}
-    //       />
-    //     </View>
+          <Button 
+            title='Thêm việc'
+            color={'red'}
+            onPress={handleAddToDo}
+          />
+        </View>
 
-    //     {/* list to do */}
-    //     <View style = {styles.body}>
+        {/* list to do */}
+        <View style = {styles.todo}>
         
-    //       <FlatList 
-    //         data={listtodo}
-    //         keyExtractor={item => item.id + ""}
-    //         renderItem={data =>{
-    //           return(
-    //             <Pressable 
-    //             onPress={() => deleteToDo(data.item.id)}
-    //             style = {({pressed}) => ({opacity: pressed ? 0.5 : 1})}
-    //             >
-    //               <Text style = {styles.todoItem}>{data.item.name}</Text>
-    //             </Pressable>
-    //           )
-    //         }}
-    //       />
-    //     x
+          <FlatList 
+            data={listtodo}
+            keyExtractor={item => item.id + ""}
+            renderItem={data =>{
+              return(
+                <Pressable 
+                onPress={() => deleteToDo(data.item.id)}
+                style = {({pressed}) => ({opacity: pressed ? 0.5 : 1})}
+                >
+                 <View style = {styles.groupToDo}>
+                  <Text style = {styles.todoItem}>{data.item.name}</Text>
+                  <Fontisto name="close" size={24} color="black" />
+                 </View>
+                  
 
-    //     </View>
-    //   </View>
-    // </TouchableWithoutFeedback>
+                </Pressable>
+              )
+            }}
+          />
+        x
 
-    <FlexBox>
-      
-    </FlexBox>
+        </View>
+      </View>
+    </TouchableWithoutFeedback>
+
   );
 };
 
 
 const styles = StyleSheet.create({
+  groupToDo: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    borderWidth: 1,
+    justifyContent: 'space-between',
+    borderStyle: 'dashed',
+    marginBottom: 15 ,
+    marginHorizontal: 10,
+    padding: 10,
+    
+
+
+  },
   header : {
     backgroundColor: 'orange',
     paddingHorizontal: 20,
@@ -103,10 +126,9 @@ const styles = StyleSheet.create({
   },
   container: {
     paddingTop: 50,
-    paddingHorizontal: 20,
+  
     flex : 1,
-    // justifyContent: 'center',
-    // alignItems: 'center',
+    
   },
   toDoInput: {
     borderBottomWidth: 1,
@@ -119,14 +141,21 @@ const styles = StyleSheet.create({
 
   todoItem : {
     fontSize: 20,
-    borderWidth: 1,
-    marginBottom: 20,
-    borderStyle: 'dashed',
-    padding: 10
+    // borderWidth: 1,
+    // // marginBottom: 20,
+    // borderStyle: 'dashed',
+    // padding: 10
   },
 
   body:{
-    paddingHorizontal: 10
+    paddingHorizontal: 10,
+    marginBottom: 20,
+  },
+  form : {
+    marginBottom: 10
+  },
+  todo : {
+    flex: 1
   }
 });
 
